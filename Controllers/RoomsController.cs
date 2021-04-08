@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using AsyncInn.Data;
 using AsyncInn.Models;
+using AsyncInn.Data.Interfaces;
 
 namespace AsyncInn.Controllers
 {
@@ -15,10 +16,13 @@ namespace AsyncInn.Controllers
     public class RoomsController : ControllerBase
     {
         private readonly AsyncDbContext _context;
+        private readonly IRoomRepository roomRepository;
 
-        public RoomsController(AsyncDbContext context)
+        public RoomsController(AsyncDbContext context, IRoomRepository roomRepository)
         {
             _context = context;
+            this.roomRepository = roomRepository;
+
         }
 
         // GET: api/Rooms
