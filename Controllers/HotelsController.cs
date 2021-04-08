@@ -24,6 +24,7 @@ namespace AsyncInn.Controllers
             this.hotelRepository = hotelRepository;
         }
 
+
         // GET: api/Hotels
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Hotel>>> GetHotels()

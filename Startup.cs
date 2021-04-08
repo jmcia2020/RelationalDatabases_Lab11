@@ -1,4 +1,5 @@
 using AsyncInn.Data;
+using AsyncInn.Data.Interfaces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -34,6 +35,8 @@ namespace AsyncInn
                 string connectionString = Configuration.GetConnectionString("DefaultConnection");
                 options.UseSqlServer(connectionString);
             });
+
+            services.AddTransient<IHotelRepository, HotelRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
