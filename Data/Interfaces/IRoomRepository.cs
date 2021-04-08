@@ -18,8 +18,6 @@ namespace AsyncInn.Data.Interfaces
         Task PostRoom(Room hotel);
 
         Task<bool> PutRoom(Room room);
-
-
-
+        Task SaveChangesAsync();
     }
 }

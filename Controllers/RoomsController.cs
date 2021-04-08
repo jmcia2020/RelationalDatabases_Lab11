@@ -18,10 +18,11 @@ namespace AsyncInn.Controllers
         private readonly AsyncDbContext _context;
         private readonly IRoomRepository roomRepository;
 
-        public RoomsController(AsyncDbContext context)
+        public RoomsController(AsyncDbContext context, IRoomRepository roomRepository)
         {
             _context = context;
             this.roomRepository = roomRepository;
+
         }
 
         // GET: api/Rooms

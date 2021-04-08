@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace AsyncInn.Data.Interfaces
 {
-    interface IAmenityRepository
+    public interface IAmenityRepository
     {
         Task<IEnumerable<Amenity>> Amenities();
 

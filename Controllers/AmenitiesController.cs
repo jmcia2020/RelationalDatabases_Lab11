@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using AsyncInn.Data;
 using AsyncInn.Models;
+using AsyncInn.Data.Interfaces;
 
 namespace AsyncInn.Controllers
 {
@@ -15,10 +16,12 @@ namespace AsyncInn.Controllers
     public class AmenitiesController : ControllerBase
     {
         private readonly AsyncDbContext _context;
+        private readonly IAmenityRepository amenityRepository;
 
-        public AmenitiesController(AsyncDbContext context)
+        public AmenitiesController(AsyncDbContext context, IAmenityRepository amenityRepository)
         {
             _context = context;
+            this.amenityRepository = amenityRepository;
         }
 
         // GET: api/Amenities
