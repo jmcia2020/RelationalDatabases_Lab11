@@ -64,5 +64,10 @@ namespace AsyncInn.Data
         {
             throw new NotImplementedException();
         }
+
+        public Task SaveChangesAsync()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

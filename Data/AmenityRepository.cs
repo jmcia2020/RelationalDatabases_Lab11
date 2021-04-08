@@ -11,14 +11,53 @@ namespace AsyncInn.Data
     public class AmenityRepository : IAmenityRepository
 
     {
-        public Task<IEnumerable<Amenity>> Amenities()
+        private readonly AsyncDbContext _context;
+
+        public AmenityRepository(AsyncDbContext context)
         {
-            throw new NotImplementedException();
+            _context = context;
+        }
+        public async Task<IEnumerable<Amenity>> Amenities()
+        {
+            return await _context.Amenities.ToListAsync();
         }
 
-        public Task<Amenity> Amenity(int id)
+        public async Task<Amenity> GetAmenity(int id)
         {
-            throw new NotImplementedException();
+            return await _context.Amenities.FindAsync(id);
+        }
+
+        public async Task PostAmenity(Amenity amenity)
+        {
+            _context.Amenities.Add(amenity);
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task<bool> PutAmenity(Amenity amenity)
+        {
+            _context.Entry(amenity).State = EntityState.Modified;
+            try
+            {
+                await _context.SaveChangesAsync();
+                // Save worked
+                return true;
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!AmenityExists(amenity.Id))
+                {
+                    return false;
+                }
+                else
+                {
+                    throw;
+                }
+            }
+        }
+
+        private bool AmenityExists(int id)
+        {
+            return _context.Amenities.Any(e => e.Id == id);
         }
 
         public Task DeleteAmenity(Amenity amenity)
@@ -26,12 +65,7 @@ namespace AsyncInn.Data
             throw new NotImplementedException();
         }
 
-        public Task PostAmenity(Amenity amenity)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<bool> PutAmenity(Amenity hotel)
+        public Task<Amenity> Amenity(int id)
         {
             throw new NotImplementedException();
         }
