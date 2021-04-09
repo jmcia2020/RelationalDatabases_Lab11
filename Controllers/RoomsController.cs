@@ -32,7 +32,7 @@ namespace AsyncInn.Controllers
             return await _context.Rooms.ToListAsync();
             
             /* var room = await roomRepository.GetRooms();
-            return room; */ 
+            return rooms; */ 
         }
 
         // GET: api/Rooms/5
