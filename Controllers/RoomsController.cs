@@ -30,6 +30,9 @@ namespace AsyncInn.Controllers
         public async Task<ActionResult<IEnumerable<Room>>> GetRooms()
         {
             return await _context.Rooms.ToListAsync();
+            
+            /* var room = await roomRepository.GetRooms();
+            return room; */ 
         }
 
         // GET: api/Rooms/5
@@ -37,6 +40,7 @@ namespace AsyncInn.Controllers
         public async Task<ActionResult<Room>> GetRoom(int id)
         {
             var room = await _context.Rooms.FindAsync(id);
+            //var room = await roomRepository.GetRoom(id);
 
             if (room == null)
             {
@@ -84,6 +88,7 @@ namespace AsyncInn.Controllers
         {
             _context.Rooms.Add(room);
             await _context.SaveChangesAsync();
+            //await roomRepository.CreateRoom(room);
 
             return CreatedAtAction("GetRoom", new { id = room.Id }, room);
         }

@@ -61,6 +61,13 @@ namespace AsyncInn.Data
         public Task DeleteHotel(Hotel hotel)
         {
             throw new NotImplementedException();
+
+            /*
+            public async Task<Hotel> GetHotel(int id)
+            Hotel hotel = await GetHotel(id);
+            _context.Entry(hotel).State = Microsoft.EntityFrameworkCore.EntityState.Deleted;
+            await _context.SaveChangesAsync();
+            */
         }
-    }
+    }	
 }
