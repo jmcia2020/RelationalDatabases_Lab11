@@ -60,14 +60,31 @@ namespace AsyncInn.Data
             return _context.Rooms.Any(e => e.Id == id);
         }
 
-        public Task DeleteRoom(Room room)
+        /*public async Task<bool> DeleteRoom(Room room, int id)
+        {
+            Room room = await GetRoom(id);
+            if (room == null)
+            {
+                return false;
+            }
+            _context.Entry(id).State = EntityState.Deleted;
+            await _context.SaveChangesAsync();
+            return true;
+        }  */
+
+        public Task<bool> DeleteRoom(int id)
         {
             throw new NotImplementedException();
         }
 
-        public Task SaveChangesAsync()
+        public Task<bool> DeleteRoom(Room hotel)
         {
             throw new NotImplementedException();
         }
+
+        /* Task<bool> IRoomRepository.DeleteRoom(Room hotel)
+        {
+            throw new NotImplementedException();
+        } */
     }
 }

@@ -13,11 +13,11 @@ namespace AsyncInn.Data.Interfaces
 
         Task<Room> GetRoom(int id);
 
-        Task DeleteRoom(Room hotel);
+        Task<bool> DeleteRoom(Room hotel);
 
         Task PostRoom(Room hotel);
 
         Task<bool> PutRoom(Room room);
-        Task SaveChangesAsync();
+        Task<bool> DeleteRoom(int id);
     }
 }
