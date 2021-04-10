@@ -8,6 +8,9 @@ using System.Threading.Tasks;
 namespace AsyncInn.Controllers
 {
     [Route("api/[controller]")]
+    //[Route("{roomId}/Amenity/{amenityId}")]  POST
+    //[Route("{roomId}/Amenity/{amenityId}")]  DELETE
+
     [ApiController]
     public class RoomsController : ControllerBase
     {

@@ -86,5 +86,15 @@ namespace AsyncInn.Data
         {
             throw new NotImplementedException();
         } */
+
+
+
+
+        //ADD LOGIC BELOW
+
+       //AddAmenityToRoom(int roomId, int amenityId)
+
+
+       // RemoveAmentityFromRoom(int roomId, int amenityId)
     }
 }
