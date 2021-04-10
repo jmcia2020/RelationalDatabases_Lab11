@@ -83,12 +83,13 @@ namespace AsyncInn.Controllers
                 return NotFound();
             
         }
-    
-        /*
-        private bool RoomExists(int id)
+
+
+        private async Task<bool> RoomExists(int id)
         {
-            return _roomRepository.Rooms.Any(e => e.Id == id);
+            return await _roomRepository.RoomExists(id);
+
         }
-        */
+
     }
 }

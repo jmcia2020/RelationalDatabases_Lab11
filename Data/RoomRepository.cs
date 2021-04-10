@@ -44,7 +44,7 @@ namespace AsyncInn.Data
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!RoomExists(room.Id))
+                if (!RoomExists(room.Id).Result)
                 {
                     return false;
                 }
@@ -55,39 +55,24 @@ namespace AsyncInn.Data
             }
         }
 
-        private bool RoomExists(int id)
+        public async Task<bool> RoomExists(int id)
         {
             return _context.Rooms.Any(e => e.Id == id);
         }
 
-        /*public async Task<bool> DeleteRoom(Room room, int id)
+
+        public async Task<bool> DeleteRoom(int id)
         {
             Room room = await GetRoom(id);
             if (room == null)
             {
                 return false;
             }
-            _context.Entry(id).State = EntityState.Deleted;
+            //_context.Entry(id).State = EntityState.Deleted;
+            _context.Rooms.Remove(room);
             await _context.SaveChangesAsync();
             return true;
-        }  */
-
-        public Task<bool> DeleteRoom(int id)
-        {
-            throw new NotImplementedException();
         }
-
-        public Task<bool> DeleteRoom(Room hotel)
-        {
-            throw new NotImplementedException();
-        }
-
-        /* Task<bool> IRoomRepository.DeleteRoom(Room hotel)
-        {
-            throw new NotImplementedException();
-        } */
-
-
 
 
         //ADD LOGIC BELOW

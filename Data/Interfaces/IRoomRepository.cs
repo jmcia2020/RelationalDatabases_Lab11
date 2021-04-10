@@ -13,12 +13,13 @@ namespace AsyncInn.Data.Interfaces
 
         Task<Room> GetRoom(int id);
 
-        Task<bool> DeleteRoom(Room hotel);
-
         Task PostRoom(Room hotel);
 
         Task<bool> PutRoom(Room room);
+
         Task<bool> DeleteRoom(int id);
+
+        Task<bool> RoomExists(int id);
 
         //AddAmenityToRoom(int roomId, int amenityId)
 
