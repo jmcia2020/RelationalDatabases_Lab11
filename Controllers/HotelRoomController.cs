@@ -12,34 +12,34 @@ namespace AsyncInn.Controllers
     [ApiController]
     public class HotelRoomController : ControllerBase
     {
-        // GET: api/<HotelRoomController>
-        [HttpGet]
+        // GET: api/<HotelRoomController> 
+        [HttpGet]  // /api/Hotels/{hotelId}/Rooms
         public IEnumerable<string> Get()
         {
             return new string[] { "value1", "value2" };
         }
 
-        // GET api/<HotelRoomController>/5
-        [HttpGet("{id}")]
+        // GET api/<HotelRoomController>/5 
+        [HttpGet("{id}")] // /api/Hotels/{hotelId}/Rooms/{roomNumber}
         public string Get(int id)
         {
             return "value";
         }
 
         // POST api/<HotelRoomController>
-        [HttpPost]
+        [HttpPost] // //api/Hotels/{hotelId}/Rooms
         public void Post([FromBody] string value)
         {
         }
 
         // PUT api/<HotelRoomController>/5
-        [HttpPut("{id}")]
+        [HttpPut("{id}")] // /api/Hotels/{hotelId}/Rooms/{roomNumber
         public void Put(int id, [FromBody] string value)
         {
         }
 
         // DELETE api/<HotelRoomController>/5
-        [HttpDelete("{id}")]
+        [HttpDelete("{id}")] // /api/Hotels/{hotelId}/Rooms/{roomNumber}
         public void Delete(int id)
         {
         }
