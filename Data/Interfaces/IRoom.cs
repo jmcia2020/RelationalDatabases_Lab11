@@ -6,18 +6,23 @@ using System.Threading.Tasks;
 
 namespace AsyncInn.Data.Interfaces
 {
-    public interface IRoomRepository
+    public interface IRoom
     {
         //Get All
         Task<IEnumerable<Room>> GetRooms();
 
         Task<Room> GetRoom(int id);
 
-        Task DeleteRoom(Room hotel);
-
         Task PostRoom(Room hotel);
 
         Task<bool> PutRoom(Room room);
-        Task SaveChangesAsync();
+
+        Task<bool> DeleteRoom(int id);
+
+        Task<bool> RoomExists(int id);
+
+        //AddAmenityToRoom(int roomId, int amenityId)
+
+        //RemoveAmentityFromRoom(int roomId, int amenityId)
     }
 }

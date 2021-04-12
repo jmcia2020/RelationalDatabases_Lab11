@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace AsyncInn.Data
 {
-    public class HotelRepository : IHotelRepository
+    public class HotelRepository : IHotel
     {
         private readonly AsyncDbContext _context;
 
@@ -58,16 +58,16 @@ namespace AsyncInn.Data
             return _context.Hotels.Any(e => e.Id == id);
         }
 
-        public Task DeleteHotel(Hotel hotel)
+        public async Task<bool> DeleteHotel(int id)
         {
-            throw new NotImplementedException();
-
-            /*
-            public async Task<Hotel> GetHotel(int id)
             Hotel hotel = await GetHotel(id);
-            _context.Entry(hotel).State = Microsoft.EntityFrameworkCore.EntityState.Deleted;
+            if (hotel == null)
+            {
+                return false;
+            }
+            _context.Entry(hotel).State = EntityState.Deleted;
             await _context.SaveChangesAsync();
-            */
-        }
+            return true;
+        }             
     }	
 }

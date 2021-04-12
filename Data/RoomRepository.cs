@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace AsyncInn.Data
 {
-    public class RoomRepository : IRoomRepository
+    public class RoomRepository : IRoom
     {
         private readonly AsyncDbContext _context;
 
@@ -44,7 +44,7 @@ namespace AsyncInn.Data
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!RoomExists(room.Id))
+                if (!RoomExists(room.Id).Result)
                 {
                     return false;
                 }
@@ -55,19 +55,30 @@ namespace AsyncInn.Data
             }
         }
 
-        private bool RoomExists(int id)
+        public async Task<bool> RoomExists(int id)
         {
             return _context.Rooms.Any(e => e.Id == id);
         }
 
-        public Task DeleteRoom(Room room)
+        public async Task<bool> DeleteRoom(int id)
         {
-            throw new NotImplementedException();
+            Room room = await GetRoom(id);
+            if (room == null)
+            {
+                return false;
+            }
+            _context.Entry(room).State = EntityState.Deleted;
+            //_context.Rooms.Remove(room);
+            await _context.SaveChangesAsync();
+            return true;
         }
 
-        public Task SaveChangesAsync()
-        {
-            throw new NotImplementedException();
-        }
+
+        //ADD LOGIC BELOW
+
+       //AddAmenityToRoom(int roomId, int amenityId)
+
+
+       // RemoveAmentityFromRoom(int roomId, int amenityId)
     }
 }

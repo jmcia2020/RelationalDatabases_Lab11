@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace AsyncInn.Data
 {
-    public class AmenityRepository : IAmenityRepository
+    public class AmenityRepository : IAmenity
 
     {
         private readonly AsyncDbContext _context;

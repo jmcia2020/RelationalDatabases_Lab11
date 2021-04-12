@@ -7,17 +7,18 @@ using System.Threading.Tasks;
 namespace AsyncInn.Data.Interfaces
 {
     public
-        interface IHotelRepository
+        interface IHotel
     {
         
         Task<IEnumerable<Hotel>> GetHotels();
 
         Task<Hotel> GetHotel(int id);
 
-        Task DeleteHotel(Hotel hotel);
+        Task<bool> DeleteHotel(int id);
 
         Task PostHotel(Hotel hotel);
 
         Task<bool> PutHotel(Hotel hotel);
+
     }
 }
