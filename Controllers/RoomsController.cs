@@ -1,4 +1,4 @@
-﻿using AsyncInn.Data.Interfaces;
+﻿                                                  using AsyncInn.Data.Interfaces;
 using AsyncInn.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
@@ -8,8 +8,7 @@ using System.Threading.Tasks;
 namespace AsyncInn.Controllers
 {
     [Route("api/[controller]")]
-    //[Route("{roomId}/Amenity/{amenityId}")]  POST
-    //[Route("{roomId}/Amenity/{amenityId}")]  DELETE
+  
 
     [ApiController]
     public class RoomsController : ControllerBase
@@ -83,9 +82,29 @@ namespace AsyncInn.Controllers
                 return NotFound();  
         }
 
-        private async Task<bool> RoomExists(int id)
+       //[Route("{roomId}/Amenity/{amenityId}")]  POST
+        [HttpPost("{roomId}/Amenity/{amenityId}")] 
+        public async Task<IActionResult> AddAmenityToRoom(int roomId, int amenityId)
         {
-            return await _roomRepository.RoomExists(id);
+            if (!await _roomRepository.AddAmenityToRoom(roomId, amenityId))
+            {
+                return NotFound();
+            }
+
+            return NoContent();
+        }
+
+
+        //[Route("{roomId}/Amenity/{amenityId}")]  DELETE
+        [HttpDelete("{roomId}/Amenity/{amenityId}")]
+        public async Task<IActionResult> RemoveAmenityFromRoom(int roomId, int amenityId)
+        {
+            if (!await _roomRepository.RemoveAmenityFromRoom(roomId, amenityId))
+            {
+                return NotFound();
+            }
+
+            return NoContent();
         }
 
     }

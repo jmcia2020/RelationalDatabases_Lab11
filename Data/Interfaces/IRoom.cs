@@ -19,10 +19,10 @@ namespace AsyncInn.Data.Interfaces
 
         Task<bool> DeleteRoom(int id);
 
-        Task<bool> RoomExists(int id);
+        //Task<bool> RoomExists(int id);
 
-        //AddAmenityToRoom(int roomId, int amenityId)
+        Task<bool> AddAmenityToRoom(int roomId, int amenityId);
 
-        //RemoveAmentityFromRoom(int roomId, int amenityId)
+        Task<bool> RemoveAmenityFromRoom(int roomId, int amenityId);
     }
 }

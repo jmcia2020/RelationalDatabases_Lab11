@@ -44,7 +44,7 @@ namespace AsyncInn.Data
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!RoomExists(room.Id).Result)
+                if (!RoomExists(room.Id))
                 {
                     return false;
                 }
@@ -55,7 +55,7 @@ namespace AsyncInn.Data
             }
         }
 
-        public async Task<bool> RoomExists(int id)
+        private bool RoomExists(int id)
         {
             return _context.Rooms.Any(e => e.Id == id);
         }
@@ -73,12 +73,30 @@ namespace AsyncInn.Data
             return true;
         }
 
+        public async Task<bool> AddAmenityToRoom(int roomId, int amenityId)
+        {
+            var roomAmenity = new RoomAmenity
+            {
+                AmenityId = amenityId,
+                RoomId = roomId,
+            };
+            _context.RoomAmenities.Add(roomAmenity);
+            await _context.SaveChangesAsync();
+            return true;
+        }
 
-        //ADD LOGIC BELOW
 
-       //AddAmenityToRoom(int roomId, int amenityId)
-
-
-       // RemoveAmentityFromRoom(int roomId, int amenityId)
+        public async Task<bool> RemoveAmenityFromRoom(int roomId, int amenityId)
+        {
+            var roomAmenity = await _context.RoomAmenities.FindAsync(roomId, amenityId);
+            if (roomAmenity == null)
+            {
+                return false;
+            }
+                  
+            _context.RoomAmenities.Remove(roomAmenity);
+            await _context.SaveChangesAsync();
+            return true;
+        }
     }
 }
