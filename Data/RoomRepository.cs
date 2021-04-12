@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace AsyncInn.Data
 {
-    public class RoomRepository : IRoomRepository
+    public class RoomRepository : IRoom
     {
         private readonly AsyncDbContext _context;
 
@@ -60,7 +60,6 @@ namespace AsyncInn.Data
             return _context.Rooms.Any(e => e.Id == id);
         }
 
-
         public async Task<bool> DeleteRoom(int id)
         {
             Room room = await GetRoom(id);
@@ -68,8 +67,8 @@ namespace AsyncInn.Data
             {
                 return false;
             }
-            //_context.Entry(id).State = EntityState.Deleted;
-            _context.Rooms.Remove(room);
+            _context.Entry(room).State = EntityState.Deleted;
+            //_context.Rooms.Remove(room);
             await _context.SaveChangesAsync();
             return true;
         }

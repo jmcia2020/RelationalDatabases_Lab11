@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace AsyncInn.Data.Interfaces
 {
-    public interface IRoomRepository
+    public interface IRoom
     {
         //Get All
         Task<IEnumerable<Room>> GetRooms();

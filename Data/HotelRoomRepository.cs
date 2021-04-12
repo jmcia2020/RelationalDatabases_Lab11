@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace AsyncInn.Data
 {
-    public class HotelRoomRepository : IHotelRoomRepository
+    public class HotelRoomRepository : IHotelRoom
 
     {
         public Task<bool> DeleteHotelRoom(int id)

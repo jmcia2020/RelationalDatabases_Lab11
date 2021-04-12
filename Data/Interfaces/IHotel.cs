@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace AsyncInn.Data.Interfaces
 {
     public
-        interface IHotelRepository
+        interface IHotel
     {
         
         Task<IEnumerable<Hotel>> GetHotels();

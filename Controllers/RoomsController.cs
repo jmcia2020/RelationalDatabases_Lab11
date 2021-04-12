@@ -15,9 +15,9 @@ namespace AsyncInn.Controllers
     public class RoomsController : ControllerBase
     {
         //private readonly AsyncDbContext _context;
-        IRoomRepository _roomRepository;
+        IRoom _roomRepository;
 
-        public RoomsController(IRoomRepository roomRepository)
+        public RoomsController(IRoom roomRepository)
         {
             _roomRepository = roomRepository;
             //this.roomRepository = roomRepository;
@@ -80,15 +80,12 @@ namespace AsyncInn.Controllers
         {
             await _roomRepository.DeleteRoom(id);
             
-                return NotFound();
-            
+                return NotFound();  
         }
-
 
         private async Task<bool> RoomExists(int id)
         {
             return await _roomRepository.RoomExists(id);
-
         }
 
     }

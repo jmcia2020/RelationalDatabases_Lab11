@@ -16,9 +16,9 @@ namespace AsyncInn.Controllers
     public class HotelsController : ControllerBase
     {
         //private readonly AsyncDbContext _context;
-        IHotelRepository _hotelRepository;
+        IHotel _hotelRepository;
 
-        public HotelsController(IHotelRepository hotelRepository)
+        public HotelsController(IHotel hotelRepository)
         {
             _hotelRepository = hotelRepository;
             ///this.hotelRepository = hotelRepository;

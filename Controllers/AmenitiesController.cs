@@ -16,9 +16,9 @@ namespace AsyncInn.Controllers
     public class AmenitiesController : ControllerBase
     {
         private readonly AsyncDbContext _context;
-        private readonly IAmenityRepository amenityRepository;
+        private readonly IAmenity amenityRepository;
 
-        public AmenitiesController(AsyncDbContext context, IAmenityRepository amenityRepository)
+        public AmenitiesController(AsyncDbContext context, IAmenity amenityRepository)
         {
             _context = context;
             this.amenityRepository = amenityRepository;

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace AsyncInn.Data
 {
-    public class HotelRepository : IHotelRepository
+    public class HotelRepository : IHotel
     {
         private readonly AsyncDbContext _context;
 
