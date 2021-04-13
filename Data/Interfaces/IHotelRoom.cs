@@ -9,9 +9,9 @@ namespace AsyncInn.Data.Interfaces
     public interface IHotelRoom
 
     {
-        Task<IEnumerable<Hotel>> GetHotelRooms(int hotelId);
+        Task<IEnumerable<HotelModel>> GetHotelRooms(int hotelId);
 
-        Task<Hotel> GetHotelRoom(int hotelId, int roomNumber);
+        Task<HotelModel> GetHotelRoom(int hotelId, int roomNumber);
 
         Task<bool> DeleteHotelRoom(int hotelId, int roomNumber);
 

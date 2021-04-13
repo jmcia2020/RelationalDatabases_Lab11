@@ -16,23 +16,23 @@ namespace AsyncInn.Data
         {
             _context = context;
         }
-            public async Task<Hotel> GetHotel(int id)
+            public async Task<HotelModel> GetHotel(int id)
         {
             return await _context.Hotels.FindAsync(id);
         }
 
-        public async Task<IEnumerable<Hotel>> GetHotels()
+        public async Task<IEnumerable<HotelModel>> GetHotels()
         {
             return await _context.Hotels.ToListAsync(); 
         }
 
-       public async Task PostHotel(Hotel hotel)
+       public async Task PostHotel(HotelModel hotel)
         {
             _context.Hotels.Add(hotel);
             await _context.SaveChangesAsync();
         }
 
-        public async Task<bool> PutHotel(Hotel hotel)
+        public async Task<bool> PutHotel(HotelModel hotel)
         {
             _context.Entry(hotel).State = EntityState.Modified;
             try
@@ -60,7 +60,7 @@ namespace AsyncInn.Data
 
         public async Task<bool> DeleteHotel(int id)
         {
-            Hotel hotel = await GetHotel(id);
+            HotelModel hotel = await GetHotel(id);
             if (hotel == null)
             {
                 return false;

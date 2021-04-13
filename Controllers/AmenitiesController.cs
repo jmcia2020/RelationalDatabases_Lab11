@@ -26,14 +26,14 @@ namespace AsyncInn.Controllers
 
         // GET: api/Amenities
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Amenity>>> GetAmenities()
+        public async Task<ActionResult<IEnumerable<AmenityModel>>> GetAmenities()
         {
             return await _context.Amenities.ToListAsync();
         }
 
         // GET: api/Amenities/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Amenity>> GetAmenity(int id)
+        public async Task<ActionResult<AmenityModel>> GetAmenity(int id)
         {
             var amenity = await _context.Amenities.FindAsync(id);
 
@@ -48,7 +48,7 @@ namespace AsyncInn.Controllers
         // PUT: api/Amenities/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutAmenity(int id, Amenity amenity)
+        public async Task<IActionResult> PutAmenity(int id, AmenityModel amenity)
         {
             if (id != amenity.Id)
             {
@@ -79,7 +79,7 @@ namespace AsyncInn.Controllers
         // POST: api/Amenities
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Amenity>> PostAmenity(Amenity amenity)
+        public async Task<ActionResult<AmenityModel>> PostAmenity(AmenityModel amenity)
         {
             _context.Amenities.Add(amenity);
             await _context.SaveChangesAsync();

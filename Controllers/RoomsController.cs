@@ -24,7 +24,7 @@ namespace AsyncInn.Controllers
 
         // GET: api/Rooms
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Room>>> GetRooms()
+        public async Task<ActionResult<IEnumerable<RoomModel>>> GetRooms()
         {
             var rooms = await _roomRepository.GetRooms();
             return Ok(rooms);
@@ -32,7 +32,7 @@ namespace AsyncInn.Controllers
 
         // GET: api/Rooms/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Room>> GetRoom(int id)
+        public async Task<ActionResult<RoomModel>> GetRoom(int id)
         {
             var room = await _roomRepository.GetRoom(id);            
 
@@ -47,7 +47,7 @@ namespace AsyncInn.Controllers
         // PUT: api/Rooms/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutRoom(int id, Room room)
+        public async Task<IActionResult> PutRoom(int id, RoomModel room)
         {
             if (id != room.Id)
             {
@@ -66,7 +66,7 @@ namespace AsyncInn.Controllers
         // POST: api/Rooms
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Room>> PostRoom(Room room)
+        public async Task<ActionResult<RoomModel>> PostRoom(RoomModel room)
         {
             await _roomRepository.PostRoom(room);
 

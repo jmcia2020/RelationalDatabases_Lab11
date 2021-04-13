@@ -17,23 +17,23 @@ namespace AsyncInn.Data
             _context = context;
         }
 
-        public async Task<Room> GetRoom(int id)
+        public async Task<RoomModel> GetRoom(int id)
         {
             return await _context.Rooms.FindAsync(id);
         }
     
-        public async Task<IEnumerable<Room>> GetRooms()
+        public async Task<IEnumerable<RoomModel>> GetRooms()
         {
             return await _context.Rooms.ToListAsync();
         }
 
-        public async Task PostRoom(Room room)
+        public async Task PostRoom(RoomModel room)
         {
             _context.Rooms.Add(room);
             await _context.SaveChangesAsync();
         }
 
-        public async Task<bool> PutRoom(Room room)
+        public async Task<bool> PutRoom(RoomModel room)
         {
             _context.Entry(room).State = EntityState.Modified;
             try
@@ -62,7 +62,7 @@ namespace AsyncInn.Data
 
         public async Task<bool> DeleteRoom(int id)
         {
-            Room room = await GetRoom(id);
+            RoomModel room = await GetRoom(id);
             if (room == null)
             {
                 return false;
@@ -75,7 +75,7 @@ namespace AsyncInn.Data
 
         public async Task<bool> AddAmenityToRoom(int roomId, int amenityId)
         {
-            var roomAmenity = new RoomAmenity
+            var roomAmenity = new RoomAmenityModel
             {
                 AmenityId = amenityId,
                 RoomId = roomId,

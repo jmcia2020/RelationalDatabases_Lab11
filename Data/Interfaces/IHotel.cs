@@ -10,15 +10,15 @@ namespace AsyncInn.Data.Interfaces
         interface IHotel
     {
         
-        Task<IEnumerable<Hotel>> GetHotels();
+        Task<IEnumerable<HotelModel>> GetHotels();
 
-        Task<Hotel> GetHotel(int id);
+        Task<HotelModel> GetHotel(int id);
 
         Task<bool> DeleteHotel(int id);
 
-        Task PostHotel(Hotel hotel);
+        Task PostHotel(HotelModel hotel);
 
-        Task<bool> PutHotel(Hotel hotel);
+        Task<bool> PutHotel(HotelModel hotel);
 
     }
 }

@@ -15,12 +15,12 @@ namespace AsyncInn.Data
             throw new NotImplementedException();
         }
 
-        public Task<Hotel> GetHotelRoom(int hotelId, int roomNumber)
+        public Task<HotelModel> GetHotelRoom(int hotelId, int roomNumber)
         {
             throw new NotImplementedException();
         }
 
-       public Task<IEnumerable<Hotel>> GetHotelRooms(int hotelId)
+       public Task<IEnumerable<HotelModel>> GetHotelRooms(int hotelId)
         {
             throw new NotImplementedException();
         }
