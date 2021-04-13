@@ -6,15 +6,15 @@ using System.Threading.Tasks;
 
 namespace AsyncInn.Models
 {
-    public class RoomAmenity
+    public class RoomAmenityModel
     {
         public int RoomId { get; set; }
         public int AmenityId { get; set; }
 
         //Navigation Properties
 
-        public Room Room { get; set; }
+        public RoomModel Room { get; set; }
 
-        public Amenity Amenitiy { get; set; }
+        public AmenityModel Amenitiy { get; set; }
     }
 }
