@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.OpenApi.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,6 +31,16 @@ namespace AsyncInn
         {
             services.AddControllers();
 
+            services.AddSwaggerGen(options =>
+            {
+                // Make sure get the "using Statement"
+                options.SwaggerDoc("v1", new OpenApiInfo()
+                {
+                    Title = "AsyncInn",
+                    Version = "v1",
+                });
+            });
+
             services.AddDbContext<AsyncDbContext>(options => {
                 // Our DATABASE_URL from js days
                 string connectionString = Configuration.GetConnectionString("DefaultConnection");
@@ -50,7 +61,17 @@ namespace AsyncInn
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseSwagger(options => {
+                options.RouteTemplate = "/api/{documentName}/swagger.json";
+            });
+
+            app.UseSwaggerUI(options => {
+                options.SwaggerEndpoint("/api/v1/swagger.json", "AsyncInn");
+                options.RoutePrefix = "docs";
+            });
+
             app.UseRouting();
+
 
             app.UseEndpoints(endpoints =>
             {
@@ -58,9 +79,11 @@ namespace AsyncInn
 
                 endpoints.MapGet("/", async context =>
                 {
-                    await context.Response.WriteAsync("Hello World!");
+                    context.Response.Redirect("/docs"); // Temp redirect
+                    //await context.Response.WriteAsync("Hello World!");
                 });
             });
+
         }
     }   
 }
