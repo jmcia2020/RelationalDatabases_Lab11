@@ -17,23 +17,23 @@ namespace AsyncInn.Data
         {
             _context = context;
         }
-        public async Task<IEnumerable<Amenity>> Amenities()
+        public async Task<IEnumerable<AmenityModel>> Amenities()
         {
             return await _context.Amenities.ToListAsync();
         }
 
-        public async Task<Amenity> GetAmenity(int id)
+        public async Task<AmenityModel> GetAmenity(int id)
         {
             return await _context.Amenities.FindAsync(id);
         }
 
-        public async Task PostAmenity(Amenity amenity)
+        public async Task PostAmenity(AmenityModel amenity)
         {
             _context.Amenities.Add(amenity);
             await _context.SaveChangesAsync();
         }
 
-        public async Task<bool> PutAmenity(Amenity amenity)
+        public async Task<bool> PutAmenity(AmenityModel amenity)
         {
             _context.Entry(amenity).State = EntityState.Modified;
             try
@@ -60,12 +60,12 @@ namespace AsyncInn.Data
             return _context.Amenities.Any(e => e.Id == id);
         }
 
-        public Task DeleteAmenity(Amenity amenity)
+        public Task DeleteAmenity(AmenityModel amenity)
         {
             throw new NotImplementedException();
         }
 
-        public Task<Amenity> Amenity(int id)
+        public Task<AmenityModel> Amenity(int id)
         {
             throw new NotImplementedException();
         }

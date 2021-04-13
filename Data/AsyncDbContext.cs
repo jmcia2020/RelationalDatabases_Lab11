@@ -10,11 +10,13 @@ namespace AsyncInn.Data
 {
     public class AsyncDbContext : DbContext
     {
-        public DbSet<Hotel> Hotels { get; set; }
+        public DbSet<HotelModel> Hotels { get; set; }
 
-        public DbSet<Room> Rooms { get; set; }
+        public DbSet<RoomModel> Rooms { get; set; }
 
-        public DbSet<Amenity> Amenities { get; set; }
+        public DbSet<AmenityModel> Amenities { get; set; }
+
+        public DbSet<RoomAmenityModel>RoomAmenities { get; set; }
 
         public AsyncDbContext(DbContextOptions options) : base(options)
         {
@@ -23,30 +25,30 @@ namespace AsyncInn.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Room> ().HasData(
-                new Room
+            modelBuilder.Entity<RoomModel> ().HasData(
+                new RoomModel
                 {
                     Id = 1,
                     Name = "Minimalist",
                     Layout = 0
                 },
 
-                new Room
+                new RoomModel
                 {
                     Id = 2,
                     Name = "Posh",
                     Layout = 2
                 },
 
-                new Room
+                new RoomModel
                 {
                     Id = 3,
                     Name = "JustRight",
                     Layout = 1
                 });
 
-            modelBuilder.Entity<Hotel>().HasData(
-                new Hotel
+            modelBuilder.Entity<HotelModel>().HasData(
+                new HotelModel
                 {
                     Id = 1,
                     Name = "Hotel6",
@@ -57,7 +59,7 @@ namespace AsyncInn.Data
                     Phone = "555-555-1234"
                 },
 
-                new Hotel
+                new HotelModel
                 {
                     Id = 2,
                     Name = "Le Meridien",
@@ -68,7 +70,7 @@ namespace AsyncInn.Data
                     Phone = "555-555-1235"
                 },
 
-                new Hotel
+                new HotelModel
                 {
                     Id = 3,
                     Name = "Fairfield Inn",
@@ -79,23 +81,39 @@ namespace AsyncInn.Data
                     Phone = "555-555-1236"
                 });
 
-            modelBuilder.Entity<Amenity>().HasData(
-                new Amenity
+            modelBuilder.Entity<AmenityModel>().HasData(
+                new AmenityModel
                 {
                     Id = 1,
                     Name = "Toothbrush"
                 },
 
-                new Amenity
+                new AmenityModel
                 {
                     Id = 2,
                     Name = "Spa"
                 },
 
-                new Amenity
+                new AmenityModel
                 {
                     Id = 3,
                     Name = "Pool"
+                });
+
+
+            modelBuilder.Entity<HotelRoomModel>()
+                .HasKey(hotelRoom => new
+                {
+                    hotelRoom.HotelId,
+                    hotelRoom.RoomId,
+                }); 
+
+
+            modelBuilder.Entity<RoomAmenityModel>()
+                .HasKey(roomAmenity => new
+                {
+                    roomAmenity.RoomId,
+                    roomAmenity.AmenityId,
                 });
         }
     }

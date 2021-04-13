@@ -27,7 +27,7 @@ namespace AsyncInn.Controllers
 
         // GET: api/Hotels
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Hotel>>> GetHotels()
+        public async Task<ActionResult<IEnumerable<HotelModel>>> GetHotels()
         {
             var hotels = await _hotelRepository.GetHotels();
             return Ok(hotels);
@@ -35,7 +35,7 @@ namespace AsyncInn.Controllers
 
         // GET: api/Hotels/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Hotel>> GetHotel(int id)
+        public async Task<ActionResult<HotelModel>> GetHotel(int id)
         {
             var hotel = await _hotelRepository.GetHotel(id);
 
@@ -50,7 +50,7 @@ namespace AsyncInn.Controllers
         // PUT: api/Hotels/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutHotel(int id, Hotel hotel)
+        public async Task<IActionResult> PutHotel(int id, HotelModel hotel)
         {
             if (id != hotel.Id)
             {
@@ -68,7 +68,7 @@ namespace AsyncInn.Controllers
         // POST: api/Hotels
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Hotel>> PostHotel(Hotel hotel)
+        public async Task<ActionResult<HotelModel>> PostHotel(HotelModel hotel)
         {
             await _hotelRepository.PostHotel(hotel);
 

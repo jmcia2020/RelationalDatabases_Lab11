@@ -10,27 +10,27 @@ namespace AsyncInn.Data
     public class HotelRoomRepository : IHotelRoom
 
     {
-        public Task<bool> DeleteHotelRoom(int id)
+       public Task<bool> DeleteHotelRoom(int hotelId, int roomNumber)
         {
             throw new NotImplementedException();
         }
 
-        public Task<Hotel> GetHotelRoom(int id)
+        public Task<HotelModel> GetHotelRoom(int hotelId, int roomNumber)
         {
             throw new NotImplementedException();
         }
 
-        public Task<IEnumerable<Hotel>> GetHotelRooms()
+       public Task<IEnumerable<HotelModel>> GetHotelRooms(int hotelId)
         {
             throw new NotImplementedException();
         }
 
-        public Task PostHotelRoom(Hotel hotel)
+        public Task PostHotelRoom(int hotelId, int roomNumber)
         {
             throw new NotImplementedException();
         }
 
-        public Task<bool> PutHotelRoom(Hotel hotel)
+        public Task<bool> PutHotelRoom(int hotelId, int roomNumber)
         {
             throw new NotImplementedException();
         }

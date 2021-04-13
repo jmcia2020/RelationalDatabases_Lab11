@@ -1,4 +1,4 @@
-﻿using AsyncInn.Data.Interfaces;
+﻿                                                  using AsyncInn.Data.Interfaces;
 using AsyncInn.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
@@ -8,8 +8,7 @@ using System.Threading.Tasks;
 namespace AsyncInn.Controllers
 {
     [Route("api/[controller]")]
-    //[Route("{roomId}/Amenity/{amenityId}")]  POST
-    //[Route("{roomId}/Amenity/{amenityId}")]  DELETE
+  
 
     [ApiController]
     public class RoomsController : ControllerBase
@@ -25,7 +24,7 @@ namespace AsyncInn.Controllers
 
         // GET: api/Rooms
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Room>>> GetRooms()
+        public async Task<ActionResult<IEnumerable<RoomModel>>> GetRooms()
         {
             var rooms = await _roomRepository.GetRooms();
             return Ok(rooms);
@@ -33,7 +32,7 @@ namespace AsyncInn.Controllers
 
         // GET: api/Rooms/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Room>> GetRoom(int id)
+        public async Task<ActionResult<RoomModel>> GetRoom(int id)
         {
             var room = await _roomRepository.GetRoom(id);            
 
@@ -48,7 +47,7 @@ namespace AsyncInn.Controllers
         // PUT: api/Rooms/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutRoom(int id, Room room)
+        public async Task<IActionResult> PutRoom(int id, RoomModel room)
         {
             if (id != room.Id)
             {
@@ -67,7 +66,7 @@ namespace AsyncInn.Controllers
         // POST: api/Rooms
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Room>> PostRoom(Room room)
+        public async Task<ActionResult<RoomModel>> PostRoom(RoomModel room)
         {
             await _roomRepository.PostRoom(room);
 
@@ -83,9 +82,29 @@ namespace AsyncInn.Controllers
                 return NotFound();  
         }
 
-        private async Task<bool> RoomExists(int id)
+       //[Route("{roomId}/Amenity/{amenityId}")]  POST
+        [HttpPost("{roomId}/Amenity/{amenityId}")] 
+        public async Task<IActionResult> AddAmenityToRoom(int roomId, int amenityId)
         {
-            return await _roomRepository.RoomExists(id);
+            if (!await _roomRepository.AddAmenityToRoom(roomId, amenityId))
+            {
+                return NotFound();
+            }
+
+            return NoContent();
+        }
+
+
+        //[Route("{roomId}/Amenity/{amenityId}")]  DELETE
+        [HttpDelete("{roomId}/Amenity/{amenityId}")]
+        public async Task<IActionResult> RemoveAmenityFromRoom(int roomId, int amenityId)
+        {
+            if (!await _roomRepository.RemoveAmenityFromRoom(roomId, amenityId))
+            {
+                return NotFound();
+            }
+
+            return NoContent();
         }
 
     }

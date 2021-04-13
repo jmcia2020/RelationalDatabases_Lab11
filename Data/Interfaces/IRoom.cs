@@ -9,20 +9,20 @@ namespace AsyncInn.Data.Interfaces
     public interface IRoom
     {
         //Get All
-        Task<IEnumerable<Room>> GetRooms();
+        Task<IEnumerable<RoomModel>> GetRooms();
 
-        Task<Room> GetRoom(int id);
+        Task<RoomModel> GetRoom(int id);
 
-        Task PostRoom(Room hotel);
+        Task PostRoom(RoomModel hotel);
 
-        Task<bool> PutRoom(Room room);
+        Task<bool> PutRoom(RoomModel room);
 
         Task<bool> DeleteRoom(int id);
 
-        Task<bool> RoomExists(int id);
+        //Task<bool> RoomExists(int id);
 
-        //AddAmenityToRoom(int roomId, int amenityId)
+        Task<bool> AddAmenityToRoom(int roomId, int amenityId);
 
-        //RemoveAmentityFromRoom(int roomId, int amenityId)
+        Task<bool> RemoveAmenityFromRoom(int roomId, int amenityId);
     }
 }
