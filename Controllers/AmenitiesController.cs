@@ -37,7 +37,7 @@ namespace AsyncInn.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<AmenityModel>> GetAmenity(int id)
         {
-            var amenity = await _amenityRepository.Amenities.FindAsync(id);
+            var amenity = await _amenityRepository.GetAmenity(id);
 
             if (amenity == null)
             {
@@ -82,11 +82,6 @@ namespace AsyncInn.Controllers
             await _amenityRepository.DeleteAmenity(id);
             
                 return NotFound();
-        }
-
-        private bool AmenityExists(int id)
-        {
-            return _amenityRepository.Amenities.Any(e => e.Id == id);
         }
     }
 }

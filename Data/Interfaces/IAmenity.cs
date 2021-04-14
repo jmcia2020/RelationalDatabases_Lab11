@@ -8,18 +8,14 @@ namespace AsyncInn.Data.Interfaces
 {
     public interface IAmenity
     {
-        Task<IEnumerable<AmenityModel>> Amenities();
+        Task<IEnumerable<AmenityModel>> GetAmenities();
 
-        Task<AmenityModel> Amenity(int id);
+        Task<AmenityModel> GetAmenity(int id);
 
-        Task DeleteAmenity(AmenityModel amenity);
+        Task DeleteAmenity(int id);
 
         Task PostAmenity(AmenityModel amenity);
 
         Task<bool> PutAmenity(AmenityModel hotel);
-        
-        Task GetAmenities();
-
-        Task GetAmenity(int id);
     }
 }

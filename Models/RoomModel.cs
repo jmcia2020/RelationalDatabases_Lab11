@@ -18,5 +18,7 @@ namespace AsyncInn.Models
         [Required]
         [Range(0, 2)]
         public int Layout { get; set; }
+
+        //public List<AmenityDTO> Amenities { get; set; }
     }
 }
