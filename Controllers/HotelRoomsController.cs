@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AsyncInn.Data.Interfaces;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,11 +11,21 @@ namespace AsyncInn.Controllers
 {
     [Route("/api/Hotels/{hotelId}/Rooms")]
     [ApiController]
-    public class HotelRoomController : ControllerBase
+    public class HotelRoomsController : ControllerBase
     {
+        //private readonly AsyncDbContext _context;
+        IHotelRoom _hotelRoomRepository;
+
+        public HotelRoomsController(IHotelRoom hotelRoomRepository)
+        {
+            _hotelRoomRepository = hotelRoomRepository;
+            //this.hotelRoomRepository = hotelRoomRepository;
+        }
+
+
         // GET: api/<HotelRoomController> 
         [HttpGet]  // /api/Hotels/{hotelId}/Rooms
-        public IEnumerable<string> Get(int hotelId)
+        public IEnumerable<string> GetHotelRoom(int hotelId)
         {
             return new string[] { "hotelId", "roomNumber" };
         }
@@ -33,14 +44,14 @@ namespace AsyncInn.Controllers
         }
 
         // PUT api/<HotelRoomController>/5
-        [HttpPut("{roomNumber}")] // /api/Hotels/{hotelId}/Rooms/{roomnumber}
-        public void Put(int id, [FromBody] string value)
-        {
-        }
+        //[HttpPut("{roomNumber}")] // /api/Hotels/{hotelId}/Rooms/{roomnumber}
+        //public void Put(int hotelId, int roomNumber, [FromBody] PutHotelRoom model)
+        //{
+        //}
 
         // DELETE api/<HotelRoomController>/5
         [HttpDelete("{roomNumber}")] // /api/Hotels/{hotelId}/Rooms/{roomnumber}
-        public void Delete(int id)
+        public void Delete(int hotelId, int roomNumber)
         {
         }
     }
