@@ -17,5 +17,9 @@ namespace AsyncInn.Data.Interfaces
         Task PostAmenity(AmenityModel amenity);
 
         Task<bool> PutAmenity(AmenityModel hotel);
+        
+        Task GetAmenities();
+
+        Task GetAmenity(int id);
     }
 }

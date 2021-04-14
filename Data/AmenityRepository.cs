@@ -13,6 +13,7 @@ namespace AsyncInn.Data
     {
         private readonly AsyncDbContext _context;
 
+
         public AmenityRepository(AsyncDbContext context)
         {
             _context = context;
@@ -66,6 +67,16 @@ namespace AsyncInn.Data
         }
 
         public Task<AmenityModel> Amenity(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task GetAmenities()
+        {
+            throw new NotImplementedException();
+        }
+
+        Task IAmenity.GetAmenity(int id)
         {
             throw new NotImplementedException();
         }
