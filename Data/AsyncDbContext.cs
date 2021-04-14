@@ -16,7 +16,7 @@ namespace AsyncInn.Data
 
         public DbSet<AmenityModel> Amenities { get; set; }
 
-        public DbSet<RoomAmenityModel>RoomAmenities { get; set; }
+        public DbSet<RoomAmenityModel> RoomAmenities { get; set; }
 
         public AsyncDbContext(DbContextOptions options) : base(options)
         {
