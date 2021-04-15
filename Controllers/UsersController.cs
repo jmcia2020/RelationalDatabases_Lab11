@@ -33,5 +33,18 @@ namespace AsyncInn.Controllers
 
             return Ok(user);
         }
+
+
+        [HttpPost("Login")]
+        public async Task<ActionResult<UserDto>> Login(LoginData data)
+        {
+            var user = await userService.Authenticate(data.Username, data.Password);
+            if (user == null)
+            {
+                return Unauthorized();
+            }
+
+            return user;
+        }
     }
 }
