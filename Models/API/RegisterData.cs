@@ -20,5 +20,7 @@ namespace AsyncInn.Models.API
         
         public string PhoneNumber { get; set; }
 
+        //TO: what else? grad date?
+
     }
 }

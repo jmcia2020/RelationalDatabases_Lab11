@@ -106,6 +106,5 @@ namespace AsyncInn.Controllers
 
             return NoContent();
         }
-
     }
 }
