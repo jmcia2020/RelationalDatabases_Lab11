@@ -2,6 +2,7 @@
 using AsyncInn.Models.Identity;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
+using System;
 using System.Threading.Tasks;
 
 namespace AsyncInn.Services
@@ -28,7 +29,7 @@ namespace AsyncInn.Services
                     Id = user.Id,
                     Username = user.UserName,
                 };
-                return GetUserDto(user);
+                return await GetUserDtoAsync(user);
             }
 
             if (user != null)
@@ -56,7 +57,8 @@ namespace AsyncInn.Services
                     Id = user.Id,
                     Username = user.UserName,
                 };
-                return GetUserDto(user);
+                
+                return await GetUserDtoAsync(user);
             }
 
             foreach (var error in result.Errors)
@@ -72,12 +74,13 @@ namespace AsyncInn.Services
             return null;
         }
 
-        private static UserDto GetUserDto(ApplicationUser user)
+        private async Task<UserDto> GetUserDtoAsync(ApplicationUser user)
         {
             return new UserDto
             {
                 Id = user.Id,
                 Username = user.UserName,
+                Token = await tokenService.GetToken(user, TimeSpan.FromMinutes(5)),
             };
         }       
     }
