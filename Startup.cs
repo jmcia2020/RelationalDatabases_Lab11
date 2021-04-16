@@ -58,7 +58,13 @@ namespace AsyncInn
                 .AddEntityFrameworkStores<AsyncDbContext>();
 
             services.AddTransient<IUserService, IdentityUserService>();
+            services.AddTransient<JwtTokenService>();
 
+           // services.AddAuthentication(options =>
+           // {
+           //     options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+           // });
+            
             services.AddTransient<IHotel, HotelRepository>();
             services.AddTransient<IRoom, RoomRepository>();
             services.AddTransient<IAmenity, AmenityRepository>();

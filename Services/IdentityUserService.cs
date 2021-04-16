@@ -9,10 +9,12 @@ namespace AsyncInn.Services
     public class IdentityUserService : IUserService
     {
         private readonly UserManager<ApplicationUser> userManager;
+        private readonly JwtTokenService tokenService;
 
-        public IdentityUserService(UserManager<ApplicationUser> userManager)
+        public IdentityUserService(UserManager<ApplicationUser> userManager, JwtTokenService tokenService)
         {
             this.userManager = userManager;
+            this.tokenService = tokenService;
         }
 
         public async Task<UserDto> Authenticate(string username, string password)
@@ -26,6 +28,7 @@ namespace AsyncInn.Services
                     Id = user.Id,
                     Username = user.UserName,
                 };
+                return GetUserDto(user);
             }
 
             if (user != null)
@@ -53,6 +56,7 @@ namespace AsyncInn.Services
                     Id = user.Id,
                     Username = user.UserName,
                 };
+                return GetUserDto(user);
             }
 
             foreach (var error in result.Errors)
@@ -68,9 +72,13 @@ namespace AsyncInn.Services
             return null;
         }
 
-        //Task<ApplicationUser> IUserService.Register(RegisterData data, ModelStateDictionary modelState)
-        //{
-            //throw new System.NotImplementedException();
-        //}
+        private static UserDto GetUserDto(ApplicationUser user)
+        {
+            return new UserDto
+            {
+                Id = user.Id,
+                Username = user.UserName,
+            };
+        }       
     }
 }
