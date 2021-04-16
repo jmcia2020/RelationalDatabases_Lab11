@@ -1,5 +1,6 @@
 ﻿using AsyncInn.Models.API;
 using AsyncInn.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -45,6 +46,13 @@ namespace AsyncInn.Controllers
             }
 
             return user;
+        }
+
+        [Authorize]
+        [HttpGet("Self")]
+        public async Task<UserDto> Self()
+        {
+            return await userService.GetUser(this.User);
         }
     }
 }
