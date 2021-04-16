@@ -1,4 +1,4 @@
-﻿                                                  using AsyncInn.Data.Interfaces;
+﻿using AsyncInn.Data.Interfaces;
 using AsyncInn.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace AsyncInn.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/Rooms")]
   
 
     [ApiController]
@@ -106,6 +106,5 @@ namespace AsyncInn.Controllers
 
             return NoContent();
         }
-
     }
 }

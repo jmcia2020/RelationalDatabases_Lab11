@@ -13,11 +13,12 @@ namespace AsyncInn.Data
     {
         private readonly AsyncDbContext _context;
 
+
         public AmenityRepository(AsyncDbContext context)
         {
             _context = context;
         }
-        public async Task<IEnumerable<AmenityModel>> Amenities()
+        public async Task<IEnumerable<AmenityModel>> GetAmenities()
         {
             return await _context.Amenities.ToListAsync();
         }
@@ -60,14 +61,10 @@ namespace AsyncInn.Data
             return _context.Amenities.Any(e => e.Id == id);
         }
 
-        public Task DeleteAmenity(AmenityModel amenity)
+        public Task DeleteAmenity(int id)
         {
             throw new NotImplementedException();
         }
-
-        public Task<AmenityModel> Amenity(int id)
-        {
-            throw new NotImplementedException();
-        }
+        
     }
 }

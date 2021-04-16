@@ -33,5 +33,7 @@ namespace AsyncInn.Models
         [Required]
         [StringLength(60)]
         public string Phone { get; set; }
+
+        //public List<HotelRoomDTO> Rooms { get; set; }
     }
 }

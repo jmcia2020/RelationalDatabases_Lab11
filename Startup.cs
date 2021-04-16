@@ -1,8 +1,11 @@
 using AsyncInn.Data;
 using AsyncInn.Data.Interfaces;
+using AsyncInn.Models.Identity;
+using AsyncInn.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -46,7 +49,22 @@ namespace AsyncInn
                 string connectionString = Configuration.GetConnectionString("DefaultConnection");
                 options.UseSqlServer(connectionString);
             });
+            services.
+                AddIdentity<ApplicationUser, IdentityRole>(options =>
+                {
+                    options.User.RequireUniqueEmail = true;
+                })
+                
+                .AddEntityFrameworkStores<AsyncDbContext>();
 
+            services.AddTransient<IUserService, IdentityUserService>();
+            services.AddTransient<JwtTokenService>();
+
+           // services.AddAuthentication(options =>
+           // {
+           //     options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+           // });
+            
             services.AddTransient<IHotel, HotelRepository>();
             services.AddTransient<IRoom, RoomRepository>();
             services.AddTransient<IAmenity, AmenityRepository>();
@@ -72,6 +90,7 @@ namespace AsyncInn
 
             app.UseRouting();
 
+            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
