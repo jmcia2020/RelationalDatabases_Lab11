@@ -20,6 +20,10 @@ namespace AsyncInn.Models.API
         
         public string PhoneNumber { get; set; }
 
+        // Allow specifying roles when registering
+        public List<string> Roles { get; set; }
+
+
         //TO: what else? grad date?
 
     }

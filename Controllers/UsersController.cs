@@ -21,7 +21,7 @@ namespace AsyncInn.Controllers
             this.userService = userService;
         }
 
-
+        [AllowAnonymous]
         [HttpPost("Register")]
         public async Task<ActionResult<UserDto>> Register(RegisterData data)
         {
@@ -35,7 +35,7 @@ namespace AsyncInn.Controllers
             return Ok(user);
         }
 
-
+        [AllowAnonymous]
         [HttpPost("Login")]
         public async Task<ActionResult<UserDto>> Login(LoginData data)
         {

@@ -1,5 +1,6 @@
 ﻿using AsyncInn.Models;
 using AsyncInn.Models.Identity;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -27,7 +28,12 @@ namespace AsyncInn.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            // We now have to have this because IdentityDbContext does stuff
             base.OnModelCreating(modelBuilder);
+
+            SeedRole(modelBuilder, "Administrator");
+            SeedRole(modelBuilder, "Manager");
+            SeedRole(modelBuilder, "Student");
 
             modelBuilder.Entity<RoomModel> ().HasData(
                 new RoomModel
@@ -120,6 +126,19 @@ namespace AsyncInn.Data
                     roomAmenity.AmenityId,
                 });
         }
+
+        private void SeedRole(ModelBuilder modelBuilder, string roleName)
+        {
+            modelBuilder.Entity<IdentityRole>()
+                .HasData(new IdentityRole
+                {
+                    Id = roleName.ToLower(),
+                    Name = roleName,
+                    NormalizedName = roleName.ToUpper(),
+                    ConcurrencyStamp = Guid.Empty.ToString(),
+                });
+        }
+
     }
 
 }

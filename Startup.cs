@@ -3,15 +3,18 @@ using AsyncInn.Data.Interfaces;
 using AsyncInn.Models.Identity;
 using AsyncInn.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using Swashbuckle.AspNetCore.SwaggerGen;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -34,7 +37,17 @@ namespace AsyncInn
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+            services
+                .AddControllers(options =>
+                {
+                    options.Filters.Add(new AuthorizeFilter());
+                })
 
+                 .AddNewtonsoftJson(options =>
+                 {
+                     options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+                 });
+                 
             services.AddSwaggerGen(options =>
             {
                 // Make sure get the "using Statement"
@@ -43,13 +56,26 @@ namespace AsyncInn
                     Title = "AsyncInn",
                     Version = "v1",
                 });
+
+                // Make Auth available in our Swagger definition
+                options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+                {
+                    Name = "Authorization",
+                    In = ParameterLocation.Header,
+                    Type = SecuritySchemeType.ApiKey,
+                    Scheme = "Bearer",
+                });
+                options.OperationFilter<AuthenticationRequirementOperationFilter>();
             });
 
             services.AddDbContext<AsyncDbContext>(options => {
                 // Our DATABASE_URL from js days
                 string connectionString = Configuration.GetConnectionString("DefaultConnection");
+                if (connectionString == null)
+                    throw new InvalidOperationException("Connection string is not set.");
                 options.UseSqlServer(connectionString);
             });
+
             services.
                 AddIdentity<ApplicationUser, IdentityRole>(options =>
                 {
@@ -90,11 +116,13 @@ namespace AsyncInn
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseSwagger(options => {
+            app.UseSwagger(options => 
+            {
                 options.RouteTemplate = "/api/{documentName}/swagger.json";
             });
 
-            app.UseSwaggerUI(options => {
+            app.UseSwaggerUI(options => 
+            {
                 options.SwaggerEndpoint("/api/v1/swagger.json", "AsyncInn");
                 options.RoutePrefix = "docs";
             });
@@ -109,6 +137,7 @@ namespace AsyncInn
 
             app.UseEndpoints(endpoints =>
             {
+                //Make sure contollers work
                 endpoints.MapControllers();
 
                 endpoints.MapGet("/", async context =>
@@ -119,5 +148,32 @@ namespace AsyncInn
             });
 
         }
+
+
+        private class AuthenticationRequirementOperationFilter : IOperationFilter
+        {
+            public void Apply(OpenApiOperation operation, OperationFilterContext context)
+            {
+                var hasAnonymous = context.ApiDescription.CustomAttributes().OfType<AllowAnonymousAttribute>().Any();
+                if (hasAnonymous)
+                    return;
+
+                operation.Security ??= new List<OpenApiSecurityRequirement>();
+
+                var scheme = new OpenApiSecurityScheme
+                {
+                    Reference = new OpenApiReference
+                    {
+                        Id = "Bearer",
+                        Type = ReferenceType.SecurityScheme,
+                    },
+                };
+                operation.Security.Add(new OpenApiSecurityRequirement
+                {
+                    [scheme] = new List<string>()
+                });
+            }
+        }
+
     }   
 }

@@ -8,9 +8,11 @@ using Microsoft.EntityFrameworkCore;
 using AsyncInn.Data;
 using AsyncInn.Models;
 using AsyncInn.Data.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 
 namespace AsyncInn.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class HotelsController : ControllerBase
@@ -49,6 +51,8 @@ namespace AsyncInn.Controllers
 
         // PUT: api/Hotels/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+
+        [Authorize(Roles = "Administrator,Manager")]
         [HttpPut("{id}")]
         public async Task<IActionResult> PutHotel(int id, HotelModel hotel)
         {
@@ -67,6 +71,8 @@ namespace AsyncInn.Controllers
 
         // POST: api/Hotels
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+
+        [Authorize(Roles = "Administrator,Manager")]
         [HttpPost]
         public async Task<ActionResult<HotelModel>> PostHotel(HotelModel hotel)
         {
@@ -76,6 +82,8 @@ namespace AsyncInn.Controllers
         }
 
         // DELETE: api/Hotels/5
+
+        [Authorize(Roles = "Administrator")]
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteHotel(int id)
         {

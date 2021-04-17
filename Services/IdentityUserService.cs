@@ -3,6 +3,7 @@ using AsyncInn.Models.Identity;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using System;
+using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 
@@ -59,12 +60,15 @@ namespace AsyncInn.Services
 
             if (result.Succeeded)
             {
-                return new UserDto
+                if (data.Roles?.Any() == true)
                 {
-                    Id = user.Id,
-                    Username = user.UserName,
-                };
-                
+                    await userManager.AddToRolesAsync(user, data.Roles);
+                }
+                else
+                {
+                    await userManager.AddToRoleAsync(user, "student");
+                }
+
                 return await GetUserDtoAsync(user);
             }
 
@@ -88,6 +92,7 @@ namespace AsyncInn.Services
                 Id = user.Id,
                 Username = user.UserName,
                 Token = await tokenService.GetToken(user, TimeSpan.FromMinutes(5)),
+                Roles = await userManager.GetRolesAsync(user),
             };
         }       
     }
