@@ -92,6 +92,7 @@ namespace AsyncInn.Services
                 Id = user.Id,
                 Username = user.UserName,
                 Token = await tokenService.GetToken(user, TimeSpan.FromMinutes(5)),
+                Roles = await userManager.GetRolesAsync(user),
             };
         }       
     }
