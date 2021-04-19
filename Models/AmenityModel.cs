@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace AsyncInn.Models
 {
+    /// <summary>
+    /// Represents the database model for Amenities.
+    /// </summary>
     public class AmenityModel
     {
         public int Id { get; set; }
