@@ -5,6 +5,9 @@ using System.Threading.Tasks;
 
 namespace AsyncInn.Models.API
 {
+    /// <summary>
+    /// Represents public interface for anyone who has access to hotel information.
+    /// </summary>
     public class UserDto
     {
         public string Id { get; set; }
